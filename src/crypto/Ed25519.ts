@@ -3,11 +3,10 @@ import { randomBytes } from 'universal-secure-random';
 import { Key } from './key';
 
 export function newEd25519Key(): Key {
-    let secretKey = randomBytes(nacl.sign.secretKeyLength);
-    let publicKey = Buffer.from(nacl.sign.keyPair.fromSecretKey(secretKey));
+    let key = nacl.sign.keyPair.fromSeed(randomBytes(nacl.sign.seedLength))
     return {
-        publicKey: publicKey,
-        secretKey: secretKey
+        publicKey: Buffer.from(key.publicKey),
+        secretKey: Buffer.from(key.secretKey)
     }
 }
 

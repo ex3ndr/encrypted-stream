@@ -4,7 +4,7 @@ import { Key } from './key';
 
 export function newCurve25519Key(): Key {
     let secretKey = randomBytes(nacl.box.secretKeyLength);
-    let publicKey = Buffer.from(nacl.box.keyPair.fromSecretKey(secretKey));
+    let publicKey = Buffer.from(nacl.box.keyPair.fromSecretKey(secretKey).publicKey);
     return {
         publicKey,
         secretKey
