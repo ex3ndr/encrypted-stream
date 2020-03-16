@@ -1,11 +1,13 @@
 import nacl from 'tweetnacl';
+import { randomBytes } from 'universal-secure-random';
 import { Key } from './key';
 
 export function newEd25519Key(): Key {
-    let key = nacl.sign.keyPair();
+    let secretKey = randomBytes(nacl.sign.secretKeyLength);
+    let publicKey = Buffer.from(nacl.sign.keyPair.fromSecretKey(secretKey));
     return {
-        publicKey: Buffer.from(key.publicKey),
-        secretKey: Buffer.from(key.secretKey)
+        publicKey: publicKey,
+        secretKey: secretKey
     }
 }
 

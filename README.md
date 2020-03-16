@@ -15,6 +15,10 @@
 ```bash
 yarn add encrypted-stream
 ```
+### Need `universal-secure-random`
+```bash
+yarn add universal-secure-random
+```
 
 ## Configuration
 `encrypted-stream` protocol expects both sides to have assigned unique endpointId and Ed25519 key. Both sides have to know public key and endpointId of another.

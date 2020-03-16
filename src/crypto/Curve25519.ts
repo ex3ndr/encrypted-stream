@@ -1,11 +1,13 @@
-import { Key } from './key';
 import nacl from 'tweetnacl';
+import { randomBytes } from 'universal-secure-random';
+import { Key } from './key';
 
 export function newCurve25519Key(): Key {
-    let key = nacl.box.keyPair();
+    let secretKey = randomBytes(nacl.box.secretKeyLength);
+    let publicKey = Buffer.from(nacl.box.keyPair.fromSecretKey(secretKey));
     return {
-        publicKey: Buffer.from(key.publicKey),
-        secretKey: Buffer.from(key.secretKey)
+        publicKey,
+        secretKey
     };
 }
 
